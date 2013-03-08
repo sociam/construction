@@ -1,0 +1,4 @@
+name	url
+Facebook	www.facebook.com
+Friendster	www.friendster.com
+4chan	www.4chan.org

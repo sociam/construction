@@ -1,0 +1,3 @@
+id	name	description
+c0	Sociality	The degree to which something is social
+c1	Hierarchical organisation	The degree to which the machine is hierarchically organised
