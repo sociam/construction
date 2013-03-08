@@ -16,6 +16,10 @@ var load_data_into_box = function(box) {
 	u.when([$.get('data/elements.txt'), $.get('data/constructs.txt')])
 		.then(function(el_resp, con_resp) {
 			var elements = _d2o(el_resp), constructs = _d2o(con_resp);
+			elements.map(function(el) {
+				var id = 'element-'+el.name;
+				box.get_or_create(				
+			});
 			console.log('elements ', elements);
 			console.log('constructs ', constructs);
 		});
