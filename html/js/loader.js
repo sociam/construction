@@ -8,8 +8,9 @@ var _d2o = function(response) {
 	var rows = response[0].split('\n');
 	var headers = rows[0].split('\t'), data = rows.slice(1);
 	return data.map(function(r) {
+		if (r.trim().length === 0) { return; }
 		return u.dict(_.zip(headers,r.split('\t')));
-	});
+	}).filter(function(x) { return x !== undefined; });
 };
 
 var load_data_into_box = function(box) {
@@ -23,17 +24,18 @@ var load_data_into_box = function(box) {
 				var prefix = prefels.prefix, things = prefels.data;
 				return things.map(function(el) {
 					var d = u.deferred(), id = prefels.prefix+el.name;
-					box.get_obj(id).then(function(om) {
-						// set up the values
-						om.set(el);
-						console.log('setting model ', om.attributes);
-						
-						om.save().then(function() { d.resolve(id); }).fail(d.reject);
-					}).fail(d.reject);
+					box.get_obj(id)
+						.then(function(om) { om.set(el); d.resolve(id);	})
+						.fail(d.reject);
 					return d.promise();
 				});
 			});
-			u.when(_(ds).flatten()).then(loaddf.resolve).fail(loaddf.reject);
+			u.when(_(ds).flatten()).then(function() {
+				var ids = _.toArray(arguments);
+				box.save()
+					.then(function() { loaddf.resolve(ids); })
+					.fail(loaddf.reject);
+			}).fail(loaddf.reject);
 		});
 	return loaddf.promise();
 };
@@ -46,6 +48,7 @@ WebBox.load().then(function() {
 			var box = store.get_or_create_box('constructs4');
 			var helper = function() {
 				load_data_into_box(box).then(function(results) {
+					console.log('results >> ', results);
 					$('#loaded').html(results.join('<li>'));
 				});
 			};
