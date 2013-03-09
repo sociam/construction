@@ -1,6 +1,6 @@
 
 /*global $,_,document,window,console,escape,Backbone,exports */
-/*jslint vars:true, todo:true */
+/*jslint vars:true, todo:true, sloppy:true */
 
 var u;
 
@@ -13,16 +13,29 @@ var _d2o = function(response) {
 };
 
 var load_data_into_box = function(box) {
+	var loaddf = u.deferred();
 	u.when([$.get('data/elements.txt'), $.get('data/constructs.txt')])
 		.then(function(el_resp, con_resp) {
-			var elements = _d2o(el_resp), constructs = _d2o(con_resp);
-			elements.map(function(el) {
-				var id = 'element-'+el.name;
-				box.get_or_create(				
+			var ds = [
+				{prefix:'element-', data:_d2o(el_resp) },
+				{prefix:'construct-', data:_d2o(con_resp) }
+			].map(function(prefels) {
+				var prefix = prefels.prefix, things = prefels.data;
+				return things.map(function(el) {
+					var d = u.deferred(), id = prefels.prefix+el.name;
+					box.get_obj(id).then(function(om) {
+						// set up the values
+						om.set(el);
+						console.log('setting model ', om.attributes);
+						
+						om.save().then(function() { d.resolve(id); }).fail(d.reject);
+					}).fail(d.reject);
+					return d.promise();
+				});
 			});
-			console.log('elements ', elements);
-			console.log('constructs ', constructs);
+			u.when(_(ds).flatten()).then(loaddf.resolve).fail(loaddf.reject);
 		});
+	return loaddf.promise();
 };
 
 WebBox.load().then(function() {
@@ -31,7 +44,11 @@ WebBox.load().then(function() {
 	store.login('electronic','foo').then(function() {
 		store.fetch().then(function() {
 			var box = store.get_or_create_box('constructs4');
-			var helper = function() { load_data_into_box(box); };
+			var helper = function() {
+				load_data_into_box(box).then(function(results) {
+					$('#loaded').html(results.join('<li>'));
+				});
+			};
 			box.fetch().then(helper).fail(function() {
 				// assume error is resulting from box not having
 				// been created; let's try creating it and try again!
@@ -41,5 +58,6 @@ WebBox.load().then(function() {
 				});
 			});
 		});
+		
 	});		
 });
