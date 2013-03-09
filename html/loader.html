@@ -5,8 +5,9 @@
   <head><title></title></head>
   <body>
 	<h1>hello, i'm an element and construct loader</h1>
-	<div>
-	  <ol id="loaded">
+	<div ng-controller='LoaderController'>
+	  <ol>
+		<li ng-repeat="loaded in loaded_objects"> {{ loaded.id }} </li>
 	  </ol>
 	</div>	
   </body>

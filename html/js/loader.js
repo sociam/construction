@@ -25,42 +25,48 @@ var load_data_into_box = function(box) {
 				return things.map(function(el) {
 					var d = u.deferred(), id = prefels.prefix+el.name;
 					box.get_obj(id)
-						.then(function(om) { om.set(el); d.resolve(id);	})
+						.then(function(om) { om.set(el); d.resolve(om);	})
 						.fail(d.reject);
 					return d.promise();
 				});
 			});
 			u.when(_(ds).flatten()).then(function() {
-				var ids = _.toArray(arguments);
+				var objs = _.toArray(arguments);
 				box.save()
-					.then(function() { loaddf.resolve(ids); })
+					.then(function() { loaddf.resolve(objs); })
 					.fail(loaddf.reject);
 			}).fail(loaddf.reject);
 		});
 	return loaddf.promise();
 };
 
-WebBox.load().then(function() {
-	u = WebBox.utils;
-	window.store = new WebBox.Store();
-	store.login('electronic','foo').then(function() {
-		store.fetch().then(function() {
-			var box = store.get_or_create_box('constructs4');
-			var helper = function() {
-				load_data_into_box(box).then(function(results) {
-					console.log('results >> ', results);
-					$('#loaded').html(results.join('<li>'));
-				});
-			};
-			box.fetch().then(helper).fail(function() {
-				// assume error is resulting from box not having
-				// been created; let's try creating it and try again!
-				box.save().then(helper).fail(function(err) {
-					// nope, something else happened. let's die :( 
-					console.error(err);
+function LoaderController($scope) {	
+	$scope.loaded_objects = [{ id: 'boo'}];	
+	WebBox.load().then(function() {
+		u = WebBox.utils;
+		window.store = new WebBox.Store();
+		store.login('electronic','foo').then(function() {
+			store.fetch().then(function() {
+				var box = store.get_or_create_box('constructs4');
+				var helper = function() {
+					load_data_into_box(box).then(function(results) {
+						$scope.$apply(function() {
+							console.log('results ', results);
+							$scope.loaded_objects = results.slice();
+						});
+					});
+				};
+				box.fetch().then(helper).fail(function() {
+					// assume error is resulting from box not having
+					// been created; let's try creating it and try again!
+					box.save().then(helper).fail(function(err) {
+						// nope, something else happened. let's die :( 
+						console.error(err);
+					});
 				});
 			});
-		});
-		
-	});		
-});
+			
+		});		
+	});
+}
+
