@@ -3,7 +3,6 @@
 /*jslint vars:true, todo:true, sloppy:true */
 
 var u;
-
 var _d2o = function(response) {
 	var rows = response[0].split('\n');
 	var headers = rows[0].split('\t'), data = rows.slice(1);
@@ -12,7 +11,6 @@ var _d2o = function(response) {
 		return u.dict(_.zip(headers,r.split('\t')));
 	}).filter(function(x) { return x !== undefined; });
 };
-
 var load_data_into_box = function(box) {
 	var loaddf = u.deferred();
 	u.when([$.get('data/elements.txt'), $.get('data/constructs.txt')])
@@ -39,9 +37,20 @@ var load_data_into_box = function(box) {
 		});
 	return loaddf.promise();
 };
+function LoaderController($scope) {
+	// initialise our scope variable
+	$scope.loaded_objects = [];
+	$scope.error = '';
+	$scope.error_header = 'uh oh!';
 
-function LoaderController($scope) {	
-	$scope.loaded_objects = [{ id: 'boo'}];	
+	var show_error = function(msg) {
+		$scope.$apply(function() {
+			$scope.error = msg;
+			$(".alert").show();
+		});
+	};
+	
+	// party.
 	WebBox.load().then(function() {
 		u = WebBox.utils;
 		window.store = new WebBox.Store();
@@ -60,13 +69,17 @@ function LoaderController($scope) {
 					// assume error is resulting from box not having
 					// been created; let's try creating it and try again!
 					box.save().then(helper).fail(function(err) {
-						// nope, something else happened. let's die :( 
-						console.error(err);
+						// nope, something else happened. let's die :(
+						show_err(err.toString());
 					});
 				});
 			});
-			
-		});		
+		}).fail(function() {
+			show_error("couldn't connect to server");
+		});
+	}).fail(function() {
+		show_error('couldnt load webbox');
 	});
+	window.show_error = show_error;
 }
 
