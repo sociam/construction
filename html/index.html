@@ -5,7 +5,6 @@
   <head><title></title></head>
   <body>
 	<div ng-controller='ElicitationController'>
-	  <div class="elicitationid"> elcitation : {{ elicitationid }} </div>
 	  <div class="title">
 		<h2>{{ element.get('name')[0] }} </h2>		
 		<p><a href="{{ element.get('url')[0] }}" target="_top">{{ element.get('url')[0] }}</a></p>
@@ -27,7 +26,24 @@
 			</div>
 		  </li>
 	  </div>
-	</div>
+	  <div class="stats">elements: {{ elements.length }}; constructs: {{ constructs.length }}</div>
+	  <div class="elicitationid"> elcitation number : {{ elicitationid }} </div>
+	  <div class="spinner" ng-show="loading > 0">
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
+		<div class="bar4"></div>
+		<div class="bar5"></div>
+		<div class="bar6"></div>
+		<div class="bar7"></div>
+		<div class="bar8"></div>
+		<div class="bar9"></div>
+		<div class="bar10"></div>
+		<div class="bar11"></div>
+		<div class="bar12"></div>
+	  </div>
+	</div>  
+
   </body>
   <script src="../../js/vendor/jquery.min.js" type="text/javascript"></script>
   <script src="../../js/vendor/underscore.min.js" type="text/javascript"></script>
