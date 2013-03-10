@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
   <link href="../../css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet/less" type="text/css" href="css/index.less">
   <head><title></title></head>
   <body>
-	<div ng-controller='ElementCtrl'>
+	<div ng-controller='ElicitationController'>
+	  <div class="elicitationid"> elcitation : {{ elicitationid }} </div>
 	  <div class="title">
-		<h2>{{ name }} </h2>
-		<p><a href="{{ url }}" target="_top">{{ url }}</a></p>
-		<p>{{ description }} </p>
+		<h2>{{ element.get('name')[0] }} </h2>		
+		<p><a href="{{ element.get('url')[0] }}" target="_top">{{ element.get('url')[0] }}</a></p>
+		<p>{{ element.get('description')[0] }}</p>
 	  </div>
 	  <div class="constructs">
 		<ul>
 		  <li ng-repeat="construct in constructs">
-			<p><b>{{ construct.name }}</b></p>
-			<p>{{ construct.description }}</p>
+			<p><b>{{ construct.get('name')[0] }}</b></p>
+			<p>{{ construct.get('description')[0] }}</p>
 			<div class="btn-group" data-toggle="buttons-radio">
-			  <button type="button" class="btn btn-primary" ng-click="setRating('{{construct.id}}',1)">1</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating('{{construct.id}}',2)">2</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating('{{construct.id}}',3)">3</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating('{{construct.id}}',4)">4</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating('{{construct.id}}',5)">5</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating('{{construct.id}}',6)">6</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating('{{construct.id}}',7)">7</button>
+			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,1)">1</button>
+			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,2)">2</button>
+			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,3)">3</button>
+			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,4)">4</button>
+			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,5)">5</button>
+			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,6)">6</button>
+			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,7)">7</button>
 			</div>
 		  </li>
 	  </div>
