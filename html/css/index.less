@@ -1,13 +1,15 @@
 
 @import "spinner.less";
+@import url(http://fonts.googleapis.com/css?family=Asul);
 
 // main css file for 'construction' here
 
+@baseFontFamily: 'Asul', sans-serif;
+
 body {
+  font-family:'Asul', sans-serif !important;
   padding:20px !important;
   color:green;
-  font-family:helvetica neue ultralight, helvetica neue, helvetica;
-  font-weight:200;
 }
 .stats {
   position:absolute;
@@ -20,13 +22,10 @@ body {
   right:10px;
 }
 .expertbox {
-  border:1px solid #eee;
-  padding:20px;
+  padding:0px; // 10px 20px 10px 20px;
 }               
 
-h2 {
-  margin-bottom:0px !important;
-}  
+h2 {  margin-bottom:0px !important;  }
 
 .constructs {
   li {
@@ -38,3 +37,12 @@ h2 {
   }
 }
 
+.elicitation {
+  padding:0px 20px 0 20px;
+}
+.buttons {
+  margin:20px 0px 0px 0px;
+}
+form {
+  margin:0px 0px !important;
+}     

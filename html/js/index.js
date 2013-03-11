@@ -20,10 +20,11 @@ function ElicitationController($scope) {
 	$scope.username = localStorage.username || 'expert-' + (new Date ()).valueOf();
 	$scope.constructs = [];	
 	$scope.element = undefined;
-	$scope.elements = [];
+	$scope.elements = undefined;
 
 	$scope.elicitation_obj = undefined;
 	$scope.loading = 0;
+	$scope.initialised = false;
 
 	$scope.error = '';
 	$scope.error_header = 'uh oh!';
@@ -87,21 +88,23 @@ function ElicitationController($scope) {
 					u.when(obj_dfds).then(function() {
 						var objs = _.toArray(arguments);
 						$scope.$apply(function() {
+							var elements = [], constructs = [];
 							objs.map(function(x) {
-								(x.id.indexOf('element') === 0 ? $scope.elements : $scope.constructs).push(x);
+								(x.id.indexOf('element') === 0 ? elements : constructs).push(x);
 							});
-							$scope.constructs = _($scope.constructs).sortBy(function(c) { return c.id; });
-							$scope.elements = $scope.elements.filter(function(el) { return done_element_ids.indexOf(el.id) < 0; });
+							$scope.constructs = _(constructs).sortBy(function(c) { return c.id; });
+							$scope.elements = elements.filter(function(el) { return done_element_ids.indexOf(el.id) < 0; });
 							console.log('scope elements ', $scope.elements);
 							if ($scope.elements.length > 0) {
 								//
 								console.debug('elements more than 0');
 								$scope.element = $scope.elements[Math.floor($scope.elements.length*Math.random())];
 								$scope.elicitation_obj.set({ 'expert' : $scope.username, 'element' : $scope.element.id });
-							}							
+							}
+							$scope.loading--;
+							$scope.initialised = true;
 						});
 					});
-					end_loading();
 				});					
 			});
 		}).fail(function () { show_error('Could not log in. Please check your webbox and try again.'); end_loading(); });

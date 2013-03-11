@@ -8,55 +8,65 @@
   </head>
   <body  ng-app>
 	<div ng-controller='ElicitationController'>
-	  <!-- error -->
-	  <div class="alert alert-block" style="display:none">  
+	  <!-- error -->		
+	  <div class="alert alert-block" style="display:none">
 		<a class="close" data-dismiss="alert">x</a>  
 		<h4 class="alert-heading">{{ error_header }}</h4>  
 		<span class="text">{{ error }}</span>
 	  </div>
-	  <!-- done yet ? -->
-	  <div class='donebox alert alert-block' ng-show='constructs.length > 0 && elements.length==0'>
-		<a class="close" data-dismiss="alert">x</a>  
-		<h4 class="alert-heading">All done!</h4>  
-		<span class="text">Thank you.  Change your provided name and reload to start anew.</span>
-	  </div>	  
-	  <!-- -->
-	  <div class='elicitation' ng-hide='elements.length==0'> 
-		<div class="title">
-		  <h2>{{ element.get('name')[0] }} </h2>		
-		  <p><a href="{{ element.get('url')[0] }}" target="_top">{{ element.get('url')[0] }}</a></p>
-		  <p>{{ element.get('description')[0] }}</p>
+	  <div ng-show='initialised' style="display:none;">
+		<!-- done yet ? -->
+		<div class='donebox alert alert-block' ng-show='elements.length == 0'>
+		  <a class="close" data-dismiss="alert">x</a>  
+		  <h4 class="alert-heading">All done!</h4>  
+		  <span class="text">Thank you.  Change your provided name and reload to start anew.</span>
+		</div>	  
+		<!-- elicitation interace -->
+		<div class="row-fluid">
+		  <div class='span7 elicitation' ng-hide='elements.length==0'> 
+			<div class="title">
+			  <h2>{{ element.get('name')[0] | lowercase }} </h2>		
+			  <p><a href="{{ element.get('url')[0] }}" target="_top">{{ element.get('url')[0] }}</a></p>
+			  <p>{{ element.get('description')[0] }}</p>
+			</div>
+		  </div>
+		  <!-- who is it ? -->
+		  <div class='span5 expertbox'>
+			<form>
+			  <fieldset>
+				<label>Expert's name</label>
+				<input type="text" ng-model='username' ng-change="setUser()">
+			  </fieldset>
+			</form>
+		  </div>
 		</div>
-		<div class="constructs">
-		  <ul>
-			<li ng-repeat="construct in constructs">
-			  <p><b>{{ construct.get('name')[0] }}</b></p>
-			  <p>{{ construct.get('description')[0] }}</p>
-			  <div class="btn-group" data-toggle="buttons-radio">
-				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,1)">1</button>
-				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,2)">2</button>
-				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,3)">3</button>
-				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,4)">4</button>
-				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,5)">5</button>
-				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,6)">6</button>
-				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,7)">7</button>
-			  </div>
-			</li>
-		</div>
-		<div class='btn' ng-click="nextElement()">Next element</div>
+		<div class="row-fluid">
+		  <div class='span7 elicitation' ng-hide='elements.length==0'> 
+			<div class="constructs">
+			  <ul>
+				<li ng-repeat="construct in constructs">
+				  <p><b>{{ construct.get('name')[0] }}</b></p>
+				  <p>{{ construct.get('description')[0] }}</p>
+				  <div class="btn-group" data-toggle="buttons-radio">
+					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,1)">1</button>
+					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,2)">2</button>
+					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,3)">3</button>
+					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,4)">4</button>
+					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,5)">5</button>
+					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,6)">6</button>
+					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,7)">7</button>
+				  </div>
+				</li>
+			</div>
+		  </div>
+		  <div class='buttons span5' ng-hide='elements.length==0'> 
+			  <div class='btn' ng-click="nextElement()">next element <i class='icon-forward'></i></div>
+		  </div> 
+		</div> <!-- row --> 
+		<div class="stats">elements: {{ elements.length }}; constructs: {{ constructs.length }}</div>
+		<div class="elicitationid"> elcitation number : {{ elicitationid }} </div>
 	  </div>
-	  <!-- who is it ? -->
-	  <div class='expertbox'>
-		<form>
-		  <fieldset>
-			<label>Expert's (your) name</label>
-			<input type="text" ng-model='username' ng-change="setUser()">
-			<span class="help-block">(optional)</span>
-		  </fieldset>
-		</form>
-	  </div>	  
-	  <div class="stats">elements: {{ elements.length }}; constructs: {{ constructs.length }}</div>
-	  <div class="elicitationid"> elcitation number : {{ elicitationid }} </div>
+	  
 	  <div class="spinner" ng-show="loading > 0">
 		<div class="bar1"></div>
 		<div class="bar2"></div>
@@ -71,7 +81,7 @@
 		<div class="bar11"></div>
 		<div class="bar12"></div>
 	  </div>
-	</div>  
+	</div> <!-- elicitation controller --> 
 
   </body>
   <script src="../../js/vendor/lesscss.min.js" type="text/javascript"></script>  
