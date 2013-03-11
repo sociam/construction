@@ -8,27 +8,53 @@
   </head>
   <body  ng-app>
 	<div ng-controller='ElicitationController'>
-	  <div class="title">
-		<h2>{{ element.get('name')[0] }} </h2>		
-		<p><a href="{{ element.get('url')[0] }}" target="_top">{{ element.get('url')[0] }}</a></p>
-		<p>{{ element.get('description')[0] }}</p>
+	  <!-- error -->
+	  <div class="alert alert-block" style="display:none">  
+		<a class="close" data-dismiss="alert">x</a>  
+		<h4 class="alert-heading">{{ error_header }}</h4>  
+		<span class="text">{{ error }}</span>
 	  </div>
-	  <div class="constructs">
-		<ul>
-		  <li ng-repeat="construct in constructs">
-			<p><b>{{ construct.get('name')[0] }}</b></p>
-			<p>{{ construct.get('description')[0] }}</p>
-			<div class="btn-group" data-toggle="buttons-radio">
-			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,1)">1</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,2)">2</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,3)">3</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,4)">4</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,5)">5</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,6)">6</button>
-			  <button type="button" class="btn btn-primary" ng-click="setRating(construct.id,7)">7</button>
-			</div>
-		  </li>
+	  <!-- done yet ? -->
+	  <div class='donebox alert alert-block' ng-show='constructs.length > 0 && elements.length==0'>
+		<a class="close" data-dismiss="alert">x</a>  
+		<h4 class="alert-heading">All done!</h4>  
+		<span class="text">Thank you.  Change your provided name and reload to start anew.</span>
+	  </div>	  
+	  <!-- -->
+	  <div class='elicitation' ng-hide='elements.length==0'> 
+		<div class="title">
+		  <h2>{{ element.get('name')[0] }} </h2>		
+		  <p><a href="{{ element.get('url')[0] }}" target="_top">{{ element.get('url')[0] }}</a></p>
+		  <p>{{ element.get('description')[0] }}</p>
+		</div>
+		<div class="constructs">
+		  <ul>
+			<li ng-repeat="construct in constructs">
+			  <p><b>{{ construct.get('name')[0] }}</b></p>
+			  <p>{{ construct.get('description')[0] }}</p>
+			  <div class="btn-group" data-toggle="buttons-radio">
+				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,1)">1</button>
+				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,2)">2</button>
+				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,3)">3</button>
+				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,4)">4</button>
+				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,5)">5</button>
+				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,6)">6</button>
+				<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,7)">7</button>
+			  </div>
+			</li>
+		</div>
+		<div class='btn' ng-click="nextElement()">Next element</div>
 	  </div>
+	  <!-- who is it ? -->
+	  <div class='expertbox'>
+		<form>
+		  <fieldset>
+			<label>Expert's (your) name</label>
+			<input type="text" ng-model='username' ng-change="setUser()">
+			<span class="help-block">(optional)</span>
+		  </fieldset>
+		</form>
+	  </div>	  
 	  <div class="stats">elements: {{ elements.length }}; constructs: {{ constructs.length }}</div>
 	  <div class="elicitationid"> elcitation number : {{ elicitationid }} </div>
 	  <div class="spinner" ng-show="loading > 0">
