@@ -2,12 +2,6 @@
 /*global $,_,document,window,console,escape,Backbone,exports */
 /*jslint vars:true, todo:true, sloppy:true */
 
-var params = {
-	username : 'webbox',
-	password : 'webbox',
-	database : 'constructs'
-};
-
 var u, ratings;
 
 var setRating = function() {
@@ -99,7 +93,7 @@ function ElicitationController($scope) {
 								//
 								console.debug('elements more than 0');
 								$scope.element = $scope.elements[Math.floor($scope.elements.length*Math.random())];
-								$scope.elicitation_obj.set({ 'expert' : $scope.username, 'element' : $scope.element.id });
+								$scope.elicitation_obj.set({type:'elicitation','expert' : $scope.username, 'element' : $scope.element.id});
 							}
 							$scope.loading--;
 							$scope.initialised = true;

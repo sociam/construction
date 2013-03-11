@@ -2,13 +2,8 @@
 /*global $,_,document,window,console,escape,Backbone,exports */
 /*jslint vars:true, todo:true, sloppy:true */
 
-var params = {
-	username : 'webbox',
-	password : 'webbox',
-	database : 'constructs'
-};
-
 var u;
+
 var _d2o = function(response) {
 	var rows = response[0].split('\n');
 	var headers = rows[0].split('\t'), data = rows.slice(1);
@@ -17,6 +12,7 @@ var _d2o = function(response) {
 		return u.dict(_.zip(headers,r.split('\t')));
 	}).filter(function(x) { return x !== undefined; });
 };
+
 var load_data_into_box = function(box) {
 	var loaddf = u.deferred();
 	u.when([$.get('data/elements.txt'), $.get('data/constructs.txt')])
@@ -43,6 +39,7 @@ var load_data_into_box = function(box) {
 		});
 	return loaddf.promise();
 };
+
 function LoaderController($scope) {
 	// initialise our scope variable
 	$scope.loaded_objects = [];
