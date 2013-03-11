@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
-  <link href="../../css/bootstrap.css" rel="stylesheet">
-  <link rel="stylesheet/less" type="text/css" href="css/index.less">
-  <link href="/components/toolbar/toolbar.css" rel="stylesheet">  
-  <head><title></title></head>
-  <body>
+<html lang="en">
+  <head>
+	<title>construct elicitation app</title>
+	<link rel="stylesheet/less" type="text/css" href="css/index.less"/>
+	<link href="../../css/bootstrap.css" rel="stylesheet"/>
+	<link href="/components/toolbar/toolbar.css" rel="stylesheet"/>
+  </head>
+  <body  ng-app>
 	<div ng-controller='ElicitationController'>
 	  <div class="title">
 		<h2>{{ element.get('name')[0] }} </h2>		
@@ -46,6 +48,7 @@
 	</div>  
 
   </body>
+  <script src="../../js/vendor/lesscss.min.js" type="text/javascript"></script>  
   <script src="../../js/vendor/jquery.min.js" type="text/javascript"></script>
   <script src="../../js/vendor/underscore.min.js" type="text/javascript"></script>
   <script src="../../js/vendor/backbone.min.js" type="text/javascript"></script>

@@ -34,10 +34,10 @@ function ElicitationController($scope) {
 		$scope.loading++;
 		eo.save().then(function() {
 			console.log('done!');
-			$scope.loading--;
+			end_loading();
 		}).fail(function(err) {
 			u.error(err);
-			$scope.loading--; 
+			end_loading();
 		});
 	};
 	
