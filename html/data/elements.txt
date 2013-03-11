@@ -1,6 +1,45 @@
-name	url
-Facebook	www.facebook.com
-Friendster	www.friendster.com
-4chan	www.4chan.org
-myspace	www.myspace.com
-reddit	www.reddit.com
+name	url	description
+4Chan	http://www.4chan.org/	4chan is a simple image-based bulletin board where anyone can post comments and share images
+Amazon M Turk	https://www.mturk.com/mturk/welcome	The Amazon Mechanical Turk (MTurk) is a crowdsourcing Internet marketplace that enables computer programmers (known as Requesters) to co-ordinate the use of human intelligence to perform tasks that computers are currently unable to do.
+Amazon.com	http://www.amazon.com/	Amazon.com, Inc. is an American multinational electronic commerce company with headquarters in Seattle, Washington, United States. It is the world's largest online retailer.[4] Amazon.com started as an online bookstore, but soon diversified, selling DVDs, CDs, MP3 downloads, software, video games, electronics, apparel, furniture, food, toys, and jewelry.
+BigWhiteWall	http://www.bigwhitewall.com/	Big White Wall www.bigwhitewall.com is an online early intervention service for people in psychological distress. It is provided in partnership with the Tavistock and Portman NHS Foundation Trust. Big White Wall combines social networking principles with a choice of clinically informed interventions to improve mental wellbeing.
+BitBucket	https://bitbucket.org	Bitbucket is a free code DVCS hosting site for Git and Mercurial. Manage your development with a hosted wiki, issue tracker and source code.
+Booksie	http://www.booksie.com/	Booksie's goal is to provide writers with an easy way to publish and promote their work and to provide readers with access to the best creative writing on the Web, organized and catalogued for easy browsing.
+CrimeMaps	http://www.police.uk/	Local crime and policing information for England, Wales and Northern Ireland. 
+Deviant Art	http://www.deviantart.com/	Art - community of artists and those devoted to art. Digital art, skin art, themes, wallpaper art, traditional art, photography, poetry / prose.
+Digg	http://digg.com/	The most interesting and talked about stories, videos and pictures on the web. Breaking news on Technology, Politics, Entertainment, and more!
+ePinions	http://www.epinions.com/	Read Reviews on Digital Cameras, Cars, Books, Movies, Music and More.
+Facebook	http://www.facebook.com	Facebook is a social utility that connects people with friends and others who work, study and live around them.
+FixMyStreet	http://www.fixmystreet.com/	Report, view, or discuss local problems like graffiti, fly tipping, broken paving slabs, or street lighting.
+Flickr	http://www.flickr.com/	Flickr is almost certainly the best online photo management and sharing application in the world.
+FoldIt	http://fold.it/	Foldit is a revolutionary new computer game enabling you to contribute to important scientific research.
+Galaxy Zoo	http://www.galaxyzoo.org/	Galaxy Zoo is an online astronomy project which invites people to assist in the morphological classification of large numbers of galaxies.
+GitHub	https://github.com/	Online project hosting using Git. Includes source-code browser, in-line editing, wikis, and ticketing. Free for public open-source code.
+Google Reader	http://www.google.co.uk/reader	Google Reader helps you find and keep track of interesting stuff on the web. You can subscribe to your favorite websites, and keep up with what's popular. 
+Instagram	http://instagram.com/	It’s a fast, beautiful and fun way to share your photos with friends and family. Snap a picture, choose a filter to transform its look and feel, then post to Instagram. Share to Facebook, Twitter, and Tumblr too – it's as easy as pie. It's photo sharing, reinvented.
+Jabberwocky	http://hci.stanford.edu/publications/2011/Jabberwocky/jabberwocky-UIST2011.pdf	We present Jabberwocky, a social computing stack that consists of three components: a human and machine resource management system called Dormouse, a parallel programming framework for human and machine computation called ManReduce, and a high-level programming language on top of ManReduce called Dog.
+LinkedIn	http://uk.linkedin.com/	Manage your professional identity. Build and engage with your professional network. Access knowledge, insights and opportunities.
+Live Journal	http://www.livejournal.com/	Rooted in a tradition of global participation, LiveJournal is on the forefront of personal publishing, community involvement, and individual expression. Already one of the world's most respected blogging platforms, look for LiveJournal to continue to deliver improved technologies and services to its members in the coming months and years.
+London Riot Recovery Map	http://londonriotsmap.appspot.com/	A visualisation of tweets mentioning a UK postcode and the #londonriots hashtag
+MySpace	http://www.myspace.com	MySpace is a social networking service with a strong music emphasis owned by Specific Media LLC and pop music singer and actor Justin Timberlake. Myspace was launched in August 2003 and is headquartered in Beverly Hills, California. In June 2012, Myspace had 25 million unique U.S. visitors.
+PatientsLikeMe	http://www.patientslikeme.com/	PatientsLikeMe: Share your experiences with treatments. Find patients just like you. Learn from others who know.
+Picasa	http://picasaweb.google.com/	Fast and easy photo sharing from Google. Share with friends and family, or explore public photos.
+Podcast Alley	http://www.podcastalley.com/	Podcast Alley is the best site to find all your Podcasts, podcast feeds, podcast definitions, podcast software and best podcast directory.
+Quora	http://www.quora.com/	Quora connects you to everything you want to know about. Quora aims to be the easiest place to write new content and share content from the web.
+Reddit	http://reddit.com	Reddit is a social news and entertainment website where registered users submit content in the form of either a link or a text ("self") post. Other users then vote the submission "up" or "down", which is used to rank the post and determine its position on the site's pages and front page.
+ShutterFly	http://www.shutterfly.com/	Create photo books, personalize photo cards & stationery, and share photos with family and friends at Shutterfly.com
+SmugMug	http://www.smugmug.com/	Billions of happy photos, millions of passionate customers. Gorgeous online photo sharing. Protect your priceless memories. Create beautiful prints & gifts.
+Stack Overflow	http://stackoverflow.com/	A language-independent collaboratively edited question and answer site for programmers.
+The Search for Jim Grey	http://cacm.acm.org/magazines/2011/7/109892-searching-for-jim-gray/fulltext	On February 1, 2007, the DigitalGlobe satellite did a scan of the area wherer Jim Gray and his boat disappeared, generating thousands of images. The images were posted to Amazon Mechanical Turk in order to distribute the work of searching through them, in hopes of spotting his boat.
+The World Wide Web	http://en.wikipedia.org/wiki/World_Wide_Web	The World Wide Web is a system of interlinked hypertext documents accessed via the Internet. With a web browser, one can view web pages that may contain text, images, videos, and other multimedia, and navigate between them via hyperlinks.
+Tumblr	http://www.tumblr.com	A feature rich and free blog hosting platform offering professional and fully customizable templates, bookmarklets, photos, mobile apps, and social network.
+TurKit	http://groups.csail.mit.edu/uid/turkit/	TurKit is a Java/JavaScript API for running iterative tasks on Mechanical Turk. You can safely re-execute TurKit programs without re-running costly side effects on Mechanical Turk, like creating new HITs, but still write your program in a straightforward imperative manner—there is no need to unravel the program into a state machine.
+Twitter	https://twitter.com/	Instantly connect to what's most important to you. Follow your friends, experts, favorite celebrities, and breaking news.
+Ushahidi	http://www.ushahidi.com/products/ushahidi-platform	 "Ushahidi", which means "testimony" in Swahili, was a website that was initially developed to map reports of violence in Kenya after the post-election fallout at the beginning of 2008. Since then, the name "Ushahidi" has come to represent the people behind the "Ushahidi Platform".
+Vimeo	http://vimeo.com/	Vimeo is the home for high-quality videos and the people who love them.
+Wordpress.com	http://wordpress.com/	Start a WordPress blog or create a free website in minutes. Choose from over 200 free, customizable themes. Free support from awesome humans.
+Writers Cafe	http://www.writerscafe.org/	Share your poetry, short stories and novels. Join writing groups. Enter writing contests. Search publishers, literary agents and literary magazines.
+Yahoo! Answers	http://uk.answers.yahoo.com/	Ask questions and get answers from real people with Yahoo! Answers UK.
+Yahoo! Pipes	http://pipes.yahoo.com/pipes/	An interactive feed aggregator and manipulator. List of 'hot pipes' to subscribe to, and ability to create your own.
+Yelp!	http://www.yelp.co.uk/	User Reviews and Recommendations of Top Restaurants, Shopping, Nightlife, Entertainment, Services and More at Yelp.
+YouTube	http://www.youtube.com/	Share your videos with friends, family, and the world.
