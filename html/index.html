@@ -34,7 +34,7 @@
 		  <div class='span5 expertbox'>
 			<form>
 			  <fieldset>
-				<label>Expert's name</label>
+				<label>expert's name</label>
 				<input type="text" ng-model='username' ng-change="setUser()">
 			  </fieldset>
 			</form>
@@ -43,10 +43,10 @@
 		<div class="row-fluid">
 		  <div class='span7 elicitation' ng-hide='elements.length==0'> 
 			<div class="constructs">
-			  <ul>
-				<li ng-repeat="construct in constructs">
-				  <p><b>{{ construct.get('name')[0] }}</b></p>
-				  <p>{{ construct.get('description')[0] }}</p>
+			  <ul class="unstyled">
+				<li class="construct" ng-repeat="construct in constructs">
+				  <p class="construct-name">{{ construct.get('name')[0] | lowercase }}</p>
+				  <p class="construct-desc">{{ construct.get('description')[0] }}</p>
 				  <div class="btn-group" data-toggle="buttons-radio">
 					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,1)">1</button>
 					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,2)">2</button>

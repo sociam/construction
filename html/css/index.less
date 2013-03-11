@@ -9,7 +9,7 @@
 body {
   font-family:'Asul', sans-serif !important;
   padding:20px !important;
-  color:green;
+  color:#999 !important;
 }
 .stats {
   position:absolute;
@@ -30,7 +30,12 @@ h2 {  margin-bottom:0px !important;  }
 .constructs {
   li {
     margin:0.9em 0px 0.9em 0px;
-    p {  margin:0px; }
+    border-bottom:1px solid #eee;
+    padding:12px 0px 30px 5px;
+    p {
+      &.construct-name {  color:#0ac; font-size:120%;   }
+      &.construct-desc {  color:#bbb; font-weight:100;  }      
+    }
     .btn-group {
       padding:5px 0px 0px 5px;
     }
@@ -46,3 +51,6 @@ h2 {  margin-bottom:0px !important;  }
 form {
   margin:0px 0px !important;
 }     
+.btn {
+  opacity:0.6 !important;
+}
