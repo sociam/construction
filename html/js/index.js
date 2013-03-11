@@ -2,6 +2,12 @@
 /*global $,_,document,window,console,escape,Backbone,exports */
 /*jslint vars:true, todo:true, sloppy:true */
 
+var params = {
+	username : 'webbox',
+	password : 'webbox',
+	database : 'constructs'
+};
+
 var u, ratings;
 
 var setRating = function() {
@@ -40,8 +46,8 @@ function ElicitationController($scope) {
 		start_loading();
 		var store = new WebBox.Store();
 		window.store = store;  /* TODO: debug */
-		store.login('electronic','foo').then(function() {
-			var box = store.get_or_create_box('constructs4');
+		store.login(params.username,params.password).then(function() {
+			var box = store.get_or_create_box(params.database);
 			window.box = box; /* TODO: debug */
 			box.fetch().then(function() {
 				var obj_dfds = box.get_obj_ids().map(function(oid) {

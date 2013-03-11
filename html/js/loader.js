@@ -2,6 +2,12 @@
 /*global $,_,document,window,console,escape,Backbone,exports */
 /*jslint vars:true, todo:true, sloppy:true */
 
+var params = {
+	username : 'webbox',
+	password : 'webbox',
+	database : 'constructs'
+};
+
 var u;
 var _d2o = function(response) {
 	var rows = response[0].split('\n');
@@ -54,10 +60,13 @@ function LoaderController($scope) {
 	WebBox.load().then(function() {
 		u = WebBox.utils;
 		window.store = new WebBox.Store();
-		store.login('electronic','foo').then(function() {
+		store.login(params.username, params.password).then(function() {
+			console.debug('store fetching.. ');
 			store.fetch().then(function() {
-				var box = store.get_or_create_box('constructs4');
+				console.debug('store fetched ');
+				var box = store.get_or_create_box(params.database);
 				var helper = function() {
+					console.debug('beginning load process ');
 					load_data_into_box(box).then(function(results) {
 						$scope.$apply(function() {
 							console.log('results ', results);
@@ -68,9 +77,11 @@ function LoaderController($scope) {
 				box.fetch().then(helper).fail(function() {
 					// assume error is resulting from box not having
 					// been created; let's try creating it and try again!
+					console.debug('trying to create it ', box.get_id());
 					box.save().then(helper).fail(function(err) {
 						// nope, something else happened. let's die :(
-						show_err(err.toString());
+						console.error(err);
+						show_error(JSON.stringify(err));
 					});
 				});
 			});
