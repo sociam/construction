@@ -31,6 +31,74 @@ function ResultsController($scope) {
 		$scope.element = $scope.elements[previdx < 0 ? $scope.elements.length -1 : previdx];
 	};
 
+	var update_histogram = function(element) {
+		var c = d3.select(this);
+		c.selectAll('g').remove();
+		
+		var construct_id = c.attr('data-construct');
+		var elicitations =
+			$scope.elicitations.filter(function(el) {
+				return el.get('element') &&
+					el.get('element').indexOf(element.id) >= 0 &&
+					el.get(construct_id) && el.get(construct_id).length > 0;
+			});
+
+		var margin = {top: 10, right: 30, bottom: 30, left: 30},
+		   width = 400 - margin.left - margin.right,
+		   height = 100 - margin.top - margin.bottom;
+		
+		var bins = [0,1,2,3,4,5,6,7,8];
+		
+		var x = d3.scale.linear().domain([0, 8]).range([0, width]);
+		console.log('comp width ', width);
+		window.xscale = x;
+		// Generate a histogram using twenty uniformly-spaced bins.
+		// console.log(' x ticks ', x.ticks(7));
+		
+		var data =
+			d3.layout.histogram().bins(bins)(elicitations.map(function(e) { return e.get(construct_id)[0]; }));
+		
+		var y = d3.scale.linear()
+			.domain([0, d3.max(data, function(d) { return d.y; })])
+			.range([height, 0]);
+		
+		var xAxis = d3.svg.axis().scale(x).orient("bottom");
+		
+		var svg = c.append("g")
+			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		console.log('data > ', data);
+		console.log('width ', data[0].x, data[0].dx, x(data[0].dx + data[0].x), x(1));		
+		
+		var bar = svg.selectAll(".bar")
+			.data(data)
+			.enter().append("g")
+			.attr("class", "bar")
+			.attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+		
+		bar.append("rect")
+			.attr("x", 1)
+			.attr("width", x(data[0].dx))
+			.attr('fill', '#aaf')
+			.attr("height", function(d) { return height - (y(d.y)); });
+		
+		bar.append("text")
+			.attr("dy", ".75em")
+			.attr("y", 6)
+			.attr("x", x(data[0].dx) / 2)
+			.attr("text-anchor", "middle")
+			.attr('fill', 'white')
+			.text(function(d) { return d.y; });
+		
+		svg.append("g")
+			.attr("class", "xaxis")
+			.attr("transform", "translate(0," + height + ")")
+			.call(xAxis);
+	};
+	var update_histograms = function(element) {
+		d3.selectAll('.histogram').each(function() { update_histogram.apply(this, [element]); });
+	};
+
 	WebBox.load().then(function() {
 		u = WebBox.utils;
 		start_loading();
@@ -54,15 +122,13 @@ function ResultsController($scope) {
 								.sortBy(function(c) { return c.id; })
 								.uniq()
 								.value();
-
-							console.log('users ', users);
-							console.log('elements ', elements);
-							console.log('constructs ', constructs);														
 							
 							$scope.element = elements.length && elements[0];							
 							$scope.loading--;
 							$scope.initialised = true;
-						});
+							
+						});						
+						$scope.$watch('element', function(newelement, oldelement) {	update_histograms(newelement);	});						
 					}).fail(function(err) { show_error('could not get obj ', err); });
 			}).fail(function () {
 				// box fetch fail
