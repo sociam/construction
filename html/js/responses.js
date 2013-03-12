@@ -1,7 +1,26 @@
 
-
 /*global $,_,document,window,console,escape,Backbone,exports */
 /*jslint vars:true, todo:true, sloppy:true */
+
+// add the filter to your application module
+var module = angular.module('responses', ['filters']);
+
+angular.module('filters', []).
+	filter('nows', function () {
+        return function (text) {
+			return text.replace(/\s/g,'');
+		};
+	});
+
+// absolute hack >
+// explanation: angularjs fails to expand {{construct.id}} on 
+module.directive('renderHistogram', function() {
+	return {
+		link: function(scope,dom_element,attrs) {
+			scope.update_histogram(scope.element, scope.construct, dom_element[0]);
+		}
+	};
+});
 
 function ResultsController($scope) {
 	$scope.initialised = false;
@@ -22,7 +41,6 @@ function ResultsController($scope) {
 	};	
 	var start_loading = function() { $scope.$apply(function() { $scope.loading++; }); };
 	var end_loading = function() { $scope.$apply(function() { $scope.loading--; }); };
-
 	$scope.nextElement = function() {
 		$scope.element = $scope.elements[($scope.elements.indexOf($scope.element) + 1) % $scope.elements.length];
 	};
@@ -31,17 +49,20 @@ function ResultsController($scope) {
 		$scope.element = $scope.elements[previdx < 0 ? $scope.elements.length -1 : previdx];
 	};
 
-	var update_histogram = function(element) {
-		var c = d3.select(this);
-		c.selectAll('g').remove();
-		
-		var construct_id = c.attr('data-construct');
+	var nows = function(s) { return s.replace(/\s+/g,''); };
+
+	$scope.update_histogram = function(element, construct, dom_element) {
+		var c = dom_element ? d3.select(dom_element) : d3.select(this);
+		var construct_id = (construct && construct.id) || c.attr('data-construct');
 		var elicitations =
 			$scope.elicitations.filter(function(el) {
 				return el.get('element') &&
 					el.get('element').indexOf(element.id) >= 0 &&
 					el.get(construct_id) && el.get(construct_id).length > 0;
 			});
+
+		// debug
+		window.es = $scope.elicitations;
 
 		var margin = {top: 10, right: 30, bottom: 30, left: 30},
 		   width = 400 - margin.left - margin.right,
@@ -97,7 +118,13 @@ function ResultsController($scope) {
 			.call(xAxis);
 	};
 	$scope.update_histograms = function(element) {
-		d3.selectAll('.histogram').each(function() { update_histogram.apply(this, [element]); });
+		console.log("___________________ update histograms ", $scope.elicitations.length);
+		if (element === undefined) {
+			console.error('got undefined for update_histograms, so not doing anything');
+			return;
+		}
+		u.debug('update histograms ', element.id);
+		d3.selectAll('.histogram').each(function() { $scope.update_histogram.apply(this, [element]); });
 	};
 	
 	
@@ -126,8 +153,15 @@ function ResultsController($scope) {
 							$scope.element = elements.length && elements[0];							
 							$scope.loading--;
 							$scope.initialised = true;
+							/*
+							console.log('post-eliciations-update');
+							$scope.update_histograms($scope.element);
+							*/
 						});						
-						$scope.$watch('element', function(newelement, oldelement) {	$scope.update_histograms(newelement);	});						
+						$scope.$watch('element', function(newelement, oldelement) {
+							u.debug('element changed , firing update histos ');
+							$scope.update_histograms(newelement);
+						});						
 					}).fail(function(err) { show_error('could not get obj ', err); });
 			}).fail(function () {
 				// box fetch fail
