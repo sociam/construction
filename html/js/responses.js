@@ -95,9 +95,11 @@ function ResultsController($scope) {
 			.attr("transform", "translate(0," + height + ")")
 			.call(xAxis);
 	};
-	var update_histograms = function(element) {
+	$scope.update_histograms = function(element) {
 		d3.selectAll('.histogram').each(function() { update_histogram.apply(this, [element]); });
 	};
+	
+	
 
 	WebBox.load().then(function() {
 		u = WebBox.utils;
@@ -121,14 +123,12 @@ function ResultsController($scope) {
 								.chain()
 								.sortBy(function(c) { return c.id; })
 								.uniq()
-								.value();
-							
+								.value();							
 							$scope.element = elements.length && elements[0];							
 							$scope.loading--;
 							$scope.initialised = true;
-							
 						});						
-						$scope.$watch('element', function(newelement, oldelement) {	update_histograms(newelement);	});						
+						$scope.$watch('element', function(newelement, oldelement) {	$scope.update_histograms(newelement);	});						
 					}).fail(function(err) { show_error('could not get obj ', err); });
 			}).fail(function () {
 				// box fetch fail

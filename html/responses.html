@@ -50,7 +50,7 @@
 			</div>
 			<div class='construct' ng-repeat='construct in constructs'>
 			  <h4> {{ construct.get('name')[0] }} </h4>
-			  <svg class="histogram" data-element="{{element.id}}" data-construct="{{construct.id}}" width="400" height="100">				
+			  <svg class="histogram" ng-init="update_histograms(element)" data-element="{{element.id}}" data-construct="{{construct.id}}" width="400" height="100" >				
 			  </svg>
 			</div>
 		  </div>		  
