@@ -47,7 +47,7 @@ function ResultsController($scope) {
 		   width = 400 - margin.left - margin.right,
 		   height = 100 - margin.top - margin.bottom;
 		
-		var bins = [0,1,2,3,4,5,6,7,8];
+		var bins = [0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5]; //[1,2,3,4,5,6,7,8];
 		
 		var x = d3.scale.linear().domain([0, 8]).range([0, width]);
 		console.log('comp width ', width);
@@ -56,7 +56,8 @@ function ResultsController($scope) {
 		// console.log(' x ticks ', x.ticks(7));
 		
 		var data =
-			d3.layout.histogram().bins(bins)(elicitations.map(function(e) { return e.get(construct_id)[0]; }));
+			d3.layout.histogram()
+			.bins(bins)(elicitations.map(function(e) { return e.get(construct_id)[0]; }));
 		
 		var y = d3.scale.linear()
 			.domain([0, d3.max(data, function(d) { return d.y; })])
@@ -67,8 +68,8 @@ function ResultsController($scope) {
 		var svg = c.append("g")
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		console.log('data > ', data);
-		console.log('width ', data[0].x, data[0].dx, x(data[0].dx + data[0].x), x(1));		
+		// console.log('data > ', data);
+		// console.log('width ', data[0].x, data[0].dx, x(data[0].dx + data[0].x), x(1));		
 		
 		var bar = svg.selectAll(".bar")
 			.data(data)
@@ -79,7 +80,7 @@ function ResultsController($scope) {
 		bar.append("rect")
 			.attr("x", 1)
 			.attr("width", x(data[0].dx))
-			.attr('fill', '#aaf')
+			.attr('fill', '#aef')
 			.attr("height", function(d) { return height - (y(d.y)); });
 		
 		bar.append("text")
