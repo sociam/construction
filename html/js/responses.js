@@ -50,8 +50,8 @@ function ResultsController($scope) {
 		var bins = [0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5]; //[1,2,3,4,5,6,7,8];
 		
 		var x = d3.scale.linear().domain([0, 8]).range([0, width]);
-		console.log('comp width ', width);
-		window.xscale = x;
+		// console.log('comp width ', width);
+		// window.xscale = x;
 		// Generate a histogram using twenty uniformly-spaced bins.
 		// console.log(' x ticks ', x.ticks(7));
 		
@@ -106,9 +106,7 @@ function ResultsController($scope) {
 		u = WebBox.utils;
 		start_loading();
 		var store = new WebBox.Store();
-		console.log('store ');		
 		store.login(params.username,params.password).then(function() {
-			console.log('login then ');
 			var box = store.get_or_create_box(params.database);
 			window.box = box; /* TODO: debug */
 			box.fetch().then(function() {
