@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<title>construct results display</title>
+	<link rel="stylesheet/less" type="text/css" href="css/responses.less"/>
+	<link href="../../css/bootstrap.css" rel="stylesheet"/>
+	<link href="/components/toolbar/toolbar.css" rel="stylesheet"/>
+  </head>
+  <body ng-app>
+	<div ng-controller='ResultsController'>
+	  <!-- error -->		
+	  <div class="alert alert-block" style="display:none" ng-show="error.length > 0">
+		<a class="close" data-dismiss="alert">x</a>  
+		<h4 class="alert-heading">{{ error_header }}</h4>  
+		<span class="text">{{ error }}</span>
+	  </div>	  
+	  <div ng-show="initialised" style="display:none;">
+		<div class="stats">
+		  <div>
+			<h4>data collected </h4>
+			<ul>
+			  <li> contributing users: {{ users.length }} </li>			  
+			  <li> elements: {{ elements.length }} </li>
+			  <li> constructs: {{ constructs.length }} </li>
+			  <li> elicitations: {{ elicitations.length }} </li>
+			</ul>
+		  </div>
+		</div>
+		
+		<div class="row-fluid">
+		  <div class='span7' ng-show='element'>
+			<div class="btn" ng-click='prevElement()'> <i class='icon-backward'></i>Prev Element </div>
+			<div class="btn" ng-click='nextElement()'>Next Element <i class='icon-forward'></i></div>						
+			
+			<div class="title">
+			  <h2>{{ element.get('name')[0] | lowercase }} </h2>		
+			  <p><a href="{{ element.get('url')[0] }}" target="_top">{{ element.get('url')[0] }}</a></p>
+			  <p>{{ element.get('description')[0] }}</p>
+			</div>
+		  </div>		  
+		</div>
+	  </div>
+
+	  <div class="spinner" ng-show="loading > 0">
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
+		<div class="bar4"></div>
+		<div class="bar5"></div>
+		<div class="bar6"></div>
+		<div class="bar7"></div>
+		<div class="bar8"></div>
+		<div class="bar9"></div>
+		<div class="bar10"></div>
+		<div class="bar11"></div>
+		<div class="bar12"></div>
+	  </div>
+	</div> <!-- response controller --> 
+
+  </body>
+  <script src="../../js/vendor/lesscss.min.js" type="text/javascript"></script>  
+  <script src="../../js/vendor/jquery.min.js" type="text/javascript"></script>
+  <script src="../../js/vendor/underscore.min.js" type="text/javascript"></script>
+  <script src="../../js/vendor/backbone.min.js" type="text/javascript"></script>
+  <script src="../../js/vendor/bootstrap.min.js" type="text/javascript"></script>  
+  <script type="text/javascript" src="../../js/webbox-backbone.js"></script>
+  <script type="text/javascript" src="lib/angular.min.js"></script>
+  <script type="text/javascript" src="js/dbparams.js"></script>
+  <script type="text/javascript" src="js/responses.js"></script>
+</html>
