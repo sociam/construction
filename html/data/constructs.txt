@@ -1,3 +1,32 @@
-id	name	description
-c0	Sociality	The degree to which something is social
-c1	Hierarchical organisation	The degree to which the machine is hierarchically organised
+name	description	min-description	max-description
+popluarity	Popularity	Unpopular	Very Popular
+maturity	Maturity	New	Mature
+passivity	Ratio of passive to active participants	Passive	Active
+participation	Frequency of participation	Infrequent	Frequent
+competitors	Number of competitors	Not Many	Many
+generality	Generality of audience	Specific	General
+domainspecificity	Domain specificity	Specific	General
+roles	Different roles clearly defined	Few Roles	Defined Roles
+hierarchical	Extent of hierarchical organisation of roles	No Hierarchy	Deep/Well-defined Hierarchy
+reputation	Explicit representation of participant reputation	No Reputations	Reputations
+anonymity	Participant anonymity	No Anonymity	Complete Anonymity
+actions	Variety of actions participants can perform	Single Action	Large variety of actions
+contributions	Variety of types of contributions	Single Type	Large variety of types
+contributions-types	Degree to which participants can define new types of contributions	Not possible	Complete freedom
+contributions-quality	Quality of participant contributions	Low quality	High quality
+timeliness	Importance of Timely Participation	Unimportant	Timely
+social-features	Level of social features	No social features	Large variety of social features
+intrinsic	Degree of use of intrinsic or extrinsic motivation	No motivation	Variety of motivations
+rewards	Degree of use of explicit rewards	No rewards	Many rewards
+benefit-sys-oper	Level of benefit to system operator	No benefit	Great benefit
+benefit-contributor	Level of benefit to contributor	No benefit	Great benefit
+benefit-social-network	Level of benefit to social network	No benefit	Great benefit
+benefit-world	Level of benefit to greater good (world)	No benefit	Great benefit
+customisation	Level of bespoke customisation of implementation	No benefit	Great benefit
+mobile-use	Level of use of mobile devices/technology	No mobile support	Good mobile support
+realtime	Level of real-time data/information notification	No notifications	Many notifications
+opensource	Degree of open source software used/created	Proprietary	Entirely open source
+openapi	Degree of openness and availability of data created in the system (APIs/Dumps)	Closed/unavailable data	Completely open data
+geolocation	Degree of reliance on location data	No location data	Relies on location data
+geo-coverage	Extent of global geographic coverage	Highly localised	Global
+machine-suppoer	Level of machine support in acquiring and processing data	No support	Automated
