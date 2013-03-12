@@ -5,11 +5,14 @@
 // main css file for 'construction' here
 
 @baseFontFamily: 'Asul', sans-serif;
-
+* {
+  box-sizing:border-box;
+}     
 body {
   font-family:'Asul', sans-serif !important;
   padding:20px !important;
   color:#555 !important;
+  
 }
 
 // stat sand stuff 
@@ -36,9 +39,17 @@ h2 {  margin-bottom:0px !important;  }
       &.construct-desc {  color:#bbb; font-weight:100;  }      
     }
     .btn-group {
+      position:relative;
       padding:5px 0px 0px 5px;
+      .min-description, .max-description {
+        font-size:8pt; position:absolute; bottom:-20px;
+        width:120px;
+      }                 
+      .min-description { left:5px; }
+      .max-description {  right:0px; text-align:right; }      
     }
   }
+  
 }
 
 .elicitation {

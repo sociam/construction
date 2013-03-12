@@ -48,6 +48,8 @@
 				  <p class="construct-name">{{ construct.get('name')[0] | lowercase }}</p>
 				  <p class="construct-desc">{{ construct.get('description')[0] }}</p>
 				  <div class="btn-group" data-toggle="buttons-radio">
+					<div class="min-description">{{ construct.get('min-description')[0] | lowercase }}</div>
+					<div class="max-description">{{ construct.get('max-description')[0] | lowercase }}</div>					
 					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,1)">1</button>
 					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,2)">2</button>
 					<button type="button" class="btn btn-primary" ng-click="setRating(construct.id,3)">3</button>
