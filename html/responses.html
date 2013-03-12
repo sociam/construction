@@ -19,9 +19,21 @@
 		  <div>
 			<h4>data collected </h4>
 			<ul>
-			  <li> contributing users: {{ users.length }} </li>			  
-			  <li> elements: {{ elements.length }} </li>
-			  <li> constructs: {{ constructs.length }} </li>
+			  <li> <a ng-click="showusers=!showusers">contributing users</a>: {{ users.length }}
+				   <ol class="items" style="display:none" ng-show='showusers'>
+					   <li ng-repeat='u in users'> {{ u }} </li>
+				   </ol>
+			  </li>			  
+			  <li> <a ng-click="showels=!showels">elements</a>: {{ elements.length }}
+				<ol class="items" style="display:none" ng-show="showels">
+					   <li ng-repeat='e in elements'> {{ e.id }} </li>
+				</ol>
+			  </li>
+			  <li> <a ng-click="showconsts=!showconsts">constructs</a>: {{ constructs.length }}
+				<ol class="items" style="display:none" ng-show="showconsts">
+				  <li ng-repeat='e in constructs'> {{ e.id }} </li>
+				</ol>
+			  </li>
 			  <li> elicitations: {{ elicitations.length }} </li>
 			</ul>
 		  </div>
