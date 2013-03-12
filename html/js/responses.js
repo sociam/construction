@@ -17,7 +17,7 @@ angular.module('filters', []).
 module.directive('renderHistogram', function() {
 	return {
 		link: function(scope,dom_element,attrs) {
-			scope.update_histogram(scope.element, scope.construct, dom_element[0]);
+			scope.update_histogram(scope.element, scope.construct.id, dom_element[0]);
 		}
 	};
 });
@@ -51,9 +51,11 @@ function ResultsController($scope) {
 
 	var nows = function(s) { return s.replace(/\s+/g,''); };
 
-	$scope.update_histogram = function(element, construct, dom_element) {
-		var c = dom_element ? d3.select(dom_element) : d3.select(this);
-		var construct_id = (construct && construct.id) || c.attr('data-construct');
+	$scope.update_histogram = function(element, construct_id, dom_element) {
+		var c = d3.select(dom_element);
+		u.assert(construct_id !== undefined, "construct id is not defined");
+		c.selectAll('g').remove();
+		
 		var elicitations =
 			$scope.elicitations.filter(function(el) {
 				return el.get('element') &&
@@ -71,11 +73,6 @@ function ResultsController($scope) {
 		var bins = [0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5]; //[1,2,3,4,5,6,7,8];
 		
 		var x = d3.scale.linear().domain([0, 8]).range([0, width]);
-		// console.log('comp width ', width);
-		// window.xscale = x;
-		// Generate a histogram using twenty uniformly-spaced bins.
-		// console.log(' x ticks ', x.ticks(7));
-		
 		var data =
 			d3.layout.histogram()
 			.bins(bins)(elicitations.map(function(e) { return e.get(construct_id)[0]; }));
@@ -118,16 +115,15 @@ function ResultsController($scope) {
 			.call(xAxis);
 	};
 	$scope.update_histograms = function(element) {
-		console.log("___________________ update histograms ", $scope.elicitations.length);
 		if (element === undefined) {
 			console.error('got undefined for update_histograms, so not doing anything');
 			return;
 		}
-		u.debug('update histograms ', element.id);
-		d3.selectAll('.histogram').each(function() { $scope.update_histogram.apply(this, [element]); });
-	};
-	
-	
+		d3.selectAll('.histogram').each(function() {
+			var construct_id = d3.select(this).attr('data-construct');
+			$scope.update_histogram(element, construct_id, this);
+		});
+	};	
 
 	WebBox.load().then(function() {
 		u = WebBox.utils;
