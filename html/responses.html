@@ -15,18 +15,19 @@
 		<span class="text">{{ error }}</span>
 	  </div>	  
 	  <div ng-show="initialised" style="display:none;">
+		<!-- stats box --> 
 		<div class="stats">
 		  <div>
 			<h4>data collected </h4>
 			<ul>
 			  <li> <a ng-click="showusers=!showusers">contributing users</a>: {{ users.length }}
-				   <ol class="items" style="display:none" ng-show='showusers'>
-					   <li ng-repeat='u in users'> {{ u }} </li>
-				   </ol>
+				<ol class="items" style="display:none" ng-show='showusers'>
+				  <li ng-repeat='u in users'> {{ u }} </li>
+				</ol>
 			  </li>			  
 			  <li> <a ng-click="showels=!showels">elements</a>: {{ elements.length }}
 				<ol class="items" style="display:none" ng-show="showels">
-					   <li ng-repeat='e in elements'> {{ e.id }} </li>
+				  <li ng-repeat='e in elements'> {{ e.id }} </li>
 				</ol>
 			  </li>
 			  <li> <a ng-click="showconsts=!showconsts">constructs</a>: {{ constructs.length }}
@@ -37,17 +38,18 @@
 			  <li> elicitations: {{ elicitations.length }} </li>
 			</ul>
 		  </div>
-		</div>
-		
+		</div>		
 		<div class="row-fluid">
 		  <div class='span7' ng-show='element'>
 			<div class="btn" ng-click='prevElement()'> <i class='icon-backward'></i>Prev Element </div>
 			<div class="btn" ng-click='nextElement()'>Next Element <i class='icon-forward'></i></div>						
-			
 			<div class="title">
 			  <h2>{{ element.get('name')[0] | lowercase }} </h2>		
 			  <p><a href="{{ element.get('url')[0] }}" target="_top">{{ element.get('url')[0] }}</a></p>
-			  <p>{{ element.get('description')[0] }}</p>
+			  <!-- <p>{{ element.get('description')[0] }}</p> -->
+			</div>
+			<div class='construct' ng-repeat='construct in constructs'>
+			  <h4> {{ construct.get('name')[0] }}
 			</div>
 		  </div>		  
 		</div>
