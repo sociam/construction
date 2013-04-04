@@ -25,17 +25,22 @@ var load_data_into_box = function(box) {
 				return things.map(function(el) {
 					var d = u.deferred(), id = prefels.prefix+el.name;
 					box.get_obj(id)
-						.then(function(om) { om.set(el); d.resolve(om);	})
+						.then(function(om) { om.set(el); om.save(); d.resolve(om);	})
 						.fail(d.reject);
 					return d.promise();
 				});
 			});
+
+
 			u.when(_(ds).flatten()).then(function() {
 				var objs = _.toArray(arguments);
-				box.save()
-					.then(function() { loaddf.resolve(objs); })
-					.fail(loaddf.reject);
+				loaddf.resolve(objs); 
+				
+				// box.save() 
+				// 	.then(function() { loaddf.resolve(objs); })
+				// 	.fail(loaddf.reject);
 			}).fail(loaddf.reject);
+
 		});
 	return loaddf.promise();
 };
