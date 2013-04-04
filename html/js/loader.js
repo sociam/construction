@@ -31,11 +31,11 @@ var load_data_into_box = function(box) {
 				});
 			});
 			u.when(_(ds).flatten()).then(function() {
-				var objs = _.toArray(arguments);
-				box.save();
-				loaddf.resolve(objs);
-				// todo 	.then(function() { loaddf.resolve(objs); })
-				// 	.fail(loaddf.reject);
+				var objs = _.toArray(arguments); 
+				box.save().then(function() {
+					console.log("SAVEDD ! ", objs);
+					loaddf.resolve(objs);
+				}).fail(loaddf.reject);
 			}).fail(loaddf.reject);
 		});
 	return loaddf.promise();
